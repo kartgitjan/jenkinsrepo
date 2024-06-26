@@ -6,7 +6,7 @@ pipeline {
             steps {
                 script {
                     def dockerImageTag = "us-docker.pkg.dev/Project-Name/Repository-Name:latest" // or your desired tag
-                    docker.build(dockerImageTag, "-f Dockerfile .")
+                    docker.build(dockerImageTag, "-f hello-world-docker/dockerfile .")
                     docker.withRegistry('https://us-docker.pkg.dev', 'your-registry-credentials') {
                         docker.image(dockerImageTag).push()
                     }
