@@ -1,0 +1,17 @@
+pipeline {
+    agent {
+        docker { image "ubuntu:18.04" }
+    stages {
+        stage('Build and Push Docker Image') {
+            steps {
+                script {
+                    def dockerImageTag = "us-docker.pkg.dev/Project-Name/Repository-Name:latest" // or your desired tag
+                    docker.build(dockerImageTag, "-f Dockerfile .")
+                    docker.withRegistry('https://us-docker.pkg.dev', 'your-registry-credentials') {
+                        docker.image(dockerImageTag).push()
+                    }
+                }
+            }
+        }
+    }
+}
