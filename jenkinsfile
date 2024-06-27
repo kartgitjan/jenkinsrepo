@@ -4,7 +4,7 @@ pipeline {
         stage('Build and Push Docker Image') {
             steps {
                 script {
-                    def dockerImageTag = "us-east4-docker.pkg.dev/infgprj-gss-n-iacbst-gl-01/jenkins:${BUILD_NUMBER}" // or your desired tag
+                    def dockerImageTag = "us-east4-docker.pkg.dev/infgprj-gss-n-iacbst-gl-01/jenkins/hello-world:${BUILD_NUMBER}" // or your desired tag
                     docker.build(dockerImageTag, "-f hello-world-docker/dockerfile .")
                     docker.withRegistry('https://us-east4-docker.pkg.dev', 'gcpkey') {
                         docker.image(dockerImageTag).push()
