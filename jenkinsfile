@@ -27,9 +27,34 @@ pipeline {
                script {
                    git credentialsId: '1c0c8f42-8c9c-4e4f-a18c-22588c44a186',
                    url: 'https://github.com/kartgitjan/kubedeploy'
-                   branch: '*'
+                   branch: 'main'
               }
            }
+       }
+    stage('Update File') {
+         steps {
+              script {
+                   // Define the file path relative to the workspace
+                   def filePath = "delpoyment.yaml" // Replace with the actual file path
+
+                   // Read the file content
+                   def fileContent = readFile(filePath)
+
+                   // Modify the file content (replace with your desired modifications)
+                   fileContent = fileContent.replace("first commit", "second commit") 
+
+                   // Write the updated content back to the file
+                  writeFile file: filePath, text: fileContent
+              }
+           }
+        }
+    stage('Commit and Push Changes') {
+         steps {
+             git commit: 'Updated file content', // Replace with your commit message
+             credentialsId: '1c0c8f42-8c9c-4e4f-a18c-22588c44a186' // Use the same credentials ID
+             git push origin 'master' // Push to 'master' branch, modify if needed
+             }
+          }
        }
     }
 }
