@@ -1,15 +1,15 @@
 pipeline {
     agent any
-    stages {
-        stage('Checkout jenkins') {
-           steps {
-               script {
-                   git credentialsId: '1c0c8f42-8c9c-4e4f-a18c-22588c44a186',
-                   url: 'https://github.com/kartgitjan/jenkinsrepo'
-                   branch: 'main'
-              }
-           }
-       }
+#    stages {
+#        stage('Checkout jenkins') {
+#           steps {
+#               script {
+#                   git credentialsId: '1c0c8f42-8c9c-4e4f-a18c-22588c44a186',
+#                   url: 'https://github.com/kartgitjan/jenkinsrepo'
+#                   branch: 'main'
+#              }
+#           }
+#       }
        
         stage('Build and Push Docker Image') {
             steps {
