@@ -55,14 +55,15 @@ pipeline {
                       credentialsId: '1c0c8f42-8c9c-4e4f-a18c-22588c44a186' // Use the same credentials ID
                   git push origin 'main' // Push to 'master' branch, modify if needed
                } */
-                script{
+                script {
                     withCredentials([usernamePassword(credentialsId: '1c0c8f42-8c9c-4e4f-a18c-22588c44a186', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                         sh '''
                         git commit -m 'Updated the deploy yaml | Jenkins Pipeline'
                         git remote -v
                         git push https://github.com/kartgitjan/kubedeploy.git HEAD:main
-                        '''                        
-                    }
+                        '''   
+                      }
+                 }
              }
           }
        }
