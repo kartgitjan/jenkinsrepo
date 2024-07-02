@@ -50,12 +50,12 @@ pipeline {
         }
     stage('Commit and Push Changes') {
          steps {
-            /* script {
-                  git commit: 'Create delpoyment.yaml', // Replace with your commit message
-                      credentialsId: '1c0c8f42-8c9c-4e4f-a18c-22588c44a186' // Use the same credentials ID
-                  git push origin 'main' // Push to 'master' branch, modify if needed
-               } */
-                script {
+             script {
+                  git add  
+                  git commit message: 'Create delpoyment.yaml' // Replace with your commit message                       
+                  git push credentialsId: '1c0c8f42-8c9c-4e4f-a18c-22588c44a186' // Push to 'master' branch, modify if needed
+               } 
+            /*  script {
                     withCredentials([usernamePassword(credentialsId: '1c0c8f42-8c9c-4e4f-a18c-22588c44a186', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                         sh '''
                         git add delpoyment.yaml
@@ -64,7 +64,7 @@ pipeline {
                         git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/kartgitjan/kubedeploy                      
                         '''   
                       }
-                 }
+                 } */
              }
           }
        }
