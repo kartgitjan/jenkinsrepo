@@ -1,4 +1,4 @@
-pipeline {
+dpipeline {
     agent any
     stages {
 /*        stage('Checkout jenkins') {
@@ -34,17 +34,21 @@ pipeline {
     stage('Update File') {
          steps {
               script {
-                   // Define the file path relative to the workspace
-                   def filePath = "delpoyment.yaml" // Replace with the actual file path
+def fileName = 'delpoyment.yaml' // Replace with your file path and name
+def lineNumber = 5 // Update with the line number you want to modify (starts from 1)
+def newLineContent = 'update ${BUILD_NUMBER}' // Update with the new content
 
-                   // Read the file content
-                   def fileContent = readFile(filePath)
+def lines = new File(fileName).text.split('\n')
 
-                   // Modify the file content (replace with your desired modifications)
-                   fileContent = fileContent.replace("first commit", "second commit") 
+// Check if line number is within file bounds
+if (lineNumber <= 0 || lineNumber > lines.size()) {
+  throw new Exception("Invalid line number: ${lineNumber}")
+}
 
-                   // Write the updated content back to the file
-                  writeFile file: filePath, text: fileContent
+lines[lineNumber - 1] = newLineContent // Update the line at the desired index
+
+// Write updated lines back to the file
+new File(fileName).write(lines.join('\n'))
               }
            }
         }
