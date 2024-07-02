@@ -51,7 +51,7 @@ pipeline {
     stage('Commit and Push Changes') {
          steps {
              script {
-                  git commit: 'Updated $build', // Replace with your commit message
+                  git commit: 'Updated build file', // Replace with your commit message
                   credentialsId: '1c0c8f42-8c9c-4e4f-a18c-22588c44a186' // Use the same credentials ID
                   git push origin 'main' // Push to 'master' branch, modify if needed
                }
