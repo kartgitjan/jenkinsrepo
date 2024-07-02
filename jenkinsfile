@@ -63,7 +63,7 @@ pipeline {
                         git remote -v
                         git config --global user.name "${GIT_USERNAME}"
                         git config --global user.password "${GIT_PASSWORD}" 
-                        git push https://github.com/kartgitjan/kubedeploy.git HEAD:main
+                        git push --set-upstream origin main                        
                         '''   
                       }
                  }
